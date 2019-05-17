@@ -1,48 +1,68 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+RethinkDB Ansible Role that managed RethinkDB setup as single node and as a cluster.
 
-Requirements
-------------
+## Dependencies
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
+* Ansible >= 2.4
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in
-regards to parameters that may need to be set for other roles, or variables that
-are used from other roles.
+    # User and group used to run rethinkdb
+    runuser: "rethinkdb"
+    rungroup: "rethinkdb"
+    
+    # Log directory
+    log_directory: "/var/log/rethinkdb"
+    
+    # Port that used for drivers to connect to rethinkdb
+    driver_port: 28015
+    
+    # Cluster port used for RethinkDB slaves to connect to master
+    cluster_port: 29015
+    
+    # Data storage path
+    data_storage_path: "/var/lib/rethinkdb/default"
+    
+    # Set's master node from instances in rethinkdb group.
+    # Used in cluster setup.
+    master_node: "{{ groups['rethinkdb_cluster'][0] }}"
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
+Example play to install single node RethinkDB
 
-    - hosts: servers
+    - hosts: rethinkdb
       roles:
-         - { role: rethinkdb, x: 42 }
+         - { role: rethinkdb }
 
+Example play to install RethinkDB Cluster with overiding variables:
+
+    - hosts: rethinkdb_cluster
+      roles:
+        - { role: rethinkdb }
+      vars:
+        driver_port: 30000
+        cluster_port: 31000
+        data_storage_path: "/opt/rethinkdb/"
+        
 License
 -------
+MIT / BSD
 
-BSD
+## Contributing
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests and examples for any new or changed functionality.
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
+Denis Chekirda aka <Rocklviv>

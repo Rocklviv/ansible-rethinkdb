@@ -8,12 +8,24 @@ lint:
 platforms:
   - name: CentOS6
     image: centos:6
+    groups:
+      - "rethinkdb_cluster"
   - name: CentOS7
     image: centos:7
+    groups:
+      - "rethinkdb_cluster"
+    published_ports:
+      - "8080:8080"
+      - "28015:28015"
+      - "29015:29015"
   - name: Ubuntu1404
     image: ubuntu:14.04
+    groups:
+      - "rethinkdb_cluster"
   - name: Ubuntu1604
     image: ubuntu:16.04
+    groups:
+      - "rethinkdb_cluster"
 provisioner:
   name: ansible
   lint:

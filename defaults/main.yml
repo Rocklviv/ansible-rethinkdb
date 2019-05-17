@@ -17,6 +17,7 @@ ubuntu_dependencies:
   - m4
   - apt-transport-https
   - ca-certificates
+  - iproute
 
 # Defaults for CentOS
 centos_6_yum_repo: "http://download.rethinkdb.com/centos/6/x86_64/"
@@ -37,6 +38,7 @@ centos_dependencies:
   - ncurses-static
   - zlib-devel
   - zlib-static
+  - iproute
 
 # Common variables
 runuser: "rethinkdb"
@@ -45,3 +47,7 @@ log_directory: "/var/log/rethinkdb"
 driver_port: 28015
 cluster_port: 29015
 startup_config_path: "/etc/rethinkdb/instances.d"
+data_storage_path: "/var/lib/rethinkdb/default"
+
+# Cluster setup
+master_node: "{{ groups['rethinkdb_cluster'][0] }}"

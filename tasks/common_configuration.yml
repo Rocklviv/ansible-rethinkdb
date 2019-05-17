@@ -3,8 +3,20 @@
   template:
     src: "rethinkdb.conf.j2"
     dest: "{{ startup_config_path }}/rethinkdb.conf"
+  when: (groups['rethinkdb_cluster'] | length == 0)
+
+- name: "Setup group {{ rungroup }}"
+  group:
+    name: "{{ rungroup }}"
+    state: "present"
+
+- name: "Setup user {{ runuser }}"
+  user:
+    name: "{{ runuser }}"
+    group: "{{ rungroup }}"
 
 - name: "Start RethinkDB Server"
   service:
     name: "rethinkdb"
     state: "started"
+  when: (groups['rethinkdb_cluster'] | length == 0)
