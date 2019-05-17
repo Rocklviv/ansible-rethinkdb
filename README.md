@@ -39,14 +39,14 @@ Example play to install single node RethinkDB
 ```YAML
     - hosts: rethinkdb
       roles:
-         - { role: rethinkdb }
+         - { role: ansible-rethinkdb }
 ```
 
 Example play to install RethinkDB Cluster with overiding variables:
 ```YAML
     - hosts: rethinkdb_cluster
       roles:
-        - { role: rethinkdb }
+        - { role: ansible-rethinkdb }
       vars:
         driver_port: 30000
         cluster_port: 31000
