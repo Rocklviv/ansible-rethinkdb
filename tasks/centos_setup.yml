@@ -1,0 +1,30 @@
+---
+- name: "Check dependencies"
+  yum:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - "{{ centos_dependencies }}"
+
+- name: "Add yum repo CentOS 6"
+  yum_repository:
+    name: "RethinkDB"
+    description: "RethinkDB official yum repo"
+    baseurl: "{{ centos_6_yum_repo }}"
+    enabled: "yes"
+    gpgcheck: "no"
+  when: ansible_distribution_major_version == '6'
+
+- name: "Add yum repo CentOS 7"
+  yum_repository:
+    name: "RethinkDB"
+    description: "RethinkDB official yum repo"
+    baseurl: "{{ centos_7_yum_repo }}"
+    enabled: "yes"
+    gpgcheck: "no"
+  when: ansible_distribution_major_version == '7'
+
+- name: "Install RethinkDB"
+  yum:
+    name: "{{ centos_package }}"
+    state: "present"

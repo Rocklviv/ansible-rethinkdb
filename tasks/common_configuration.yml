@@ -1,0 +1,10 @@
+---
+- name: "Setup configuration file"
+  template:
+    src: "rethinkdb.conf.j2"
+    dest: "{{ startup_config_path }}/rethinkdb.conf"
+
+- name: "Start RethinkDB Server"
+  service:
+    name: "rethinkdb"
+    state: "started"

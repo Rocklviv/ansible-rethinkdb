@@ -1,0 +1,24 @@
+---
+- name: "Check dependencies installed"
+  apt:
+    name: "{{ item }}"
+    state: "present"
+    update_cache: "yes"
+  with_items:
+    - "{{ ubuntu_dependencies }}"
+
+- name: "Set RethinkDB apt repo"
+  apt_repository:
+    repo: "{{ ubuntu_repository }}"
+    state: "present"
+
+- name: "Install apt key"
+  apt_key:
+    url: "{{ ubuntu_apt_key }}"
+    state: "present"
+
+- name: "Install RethinkDB"
+  apt:
+    name: "{{ ubuntu_package }}"
+    state: "present"
+    update_cache: "yes"

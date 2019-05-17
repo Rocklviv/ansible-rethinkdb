@@ -1,0 +1,13 @@
+---
+# tasks file for rethinkdb
+- name: "Install RethinkDB on Ubuntu"
+  import_tasks: "ubuntu_setup.yml"
+  when: ansible_distribution == "Ubuntu"
+
+- name: "Install RethinkDB on CentOS"
+  import_tasks: "centos_setup.yml"
+  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == '6') or
+        (ansible_distribution == "CentOS" and ansible_distribution_major_version > '6')
+
+- name: "Configure RethinkDB"
+  import_tasks: "common_configuration.yml"

@@ -1,0 +1,47 @@
+---
+# defaults file for rethinkdb
+# Defaults for Ubuntu
+ubuntu_repository: "deb https://download.rethinkdb.com/apt {{ ansible_distribution_release }} main"
+ubuntu_apt_key: "https://download.rethinkdb.com/apt/pubkey.gpg"
+ubuntu_package: "rethinkdb"
+ubuntu_dependencies:
+  - build-essential
+  - protobuf-compiler
+  - python
+  - libprotobuf-dev
+  - libcurl4-openssl-dev
+  - libboost-all-dev
+  - libncurses5-dev
+  - libjemalloc-dev
+  - wget
+  - m4
+  - apt-transport-https
+  - ca-certificates
+
+# Defaults for CentOS
+centos_6_yum_repo: "http://download.rethinkdb.com/centos/6/x86_64/"
+centos_7_yum_repo: "http://download.rethinkdb.com/centos/7/x86_64/"
+centos_package: "rethinkdb"
+centos_dependencies:
+  - openssl-devel
+  - libcurl-devel
+  - wget
+  - tar
+  - m4
+  - git-core
+  - boost-static
+  - gcc-c++
+  - ncurses-devel
+  - which
+  - make
+  - ncurses-static
+  - zlib-devel
+  - zlib-static
+
+# Common variables
+runuser: "rethinkdb"
+rungroup: "rethinkdb"
+log_directory: "/var/log/rethinkdb"
+driver_port: 28015
+cluster_port: 29015
+startup_config_path: "/etc/rethinkdb/instances.d"
