@@ -1,5 +1,6 @@
 Ansible RethinkDB
 =========
+[![Build Status](https://travis-ci.org/Rocklviv/ansible-rethinkdb.svg?branch=master)](https://travis-ci.org/Rocklviv/ansible-rethinkdb)
 
 RethinkDB Ansible Role that managed RethinkDB setup as single node and as a cluster.
 
