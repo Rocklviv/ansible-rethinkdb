@@ -1,4 +1,4 @@
-Role Name
+Ansible RethinkDB
 =========
 
 RethinkDB Ansible Role that managed RethinkDB setup as single node and as a cluster.
@@ -9,7 +9,7 @@ RethinkDB Ansible Role that managed RethinkDB setup as single node and as a clus
 
 Role Variables
 --------------
-
+```YAML
     # User and group used to run rethinkdb
     runuser: "rethinkdb"
     rungroup: "rethinkdb"
@@ -29,18 +29,20 @@ Role Variables
     # Set's master node from instances in rethinkdb group.
     # Used in cluster setup.
     master_node: "{{ groups['rethinkdb_cluster'][0] }}"
+```
 
 Example Playbook
 ----------------
 
 Example play to install single node RethinkDB
-
+```YAML
     - hosts: rethinkdb
       roles:
          - { role: rethinkdb }
+```
 
 Example play to install RethinkDB Cluster with overiding variables:
-
+```YAML
     - hosts: rethinkdb_cluster
       roles:
         - { role: rethinkdb }
@@ -48,7 +50,8 @@ Example play to install RethinkDB Cluster with overiding variables:
         driver_port: 30000
         cluster_port: 31000
         data_storage_path: "/opt/rethinkdb/"
-        
+```
+
 License
 -------
 MIT / BSD
