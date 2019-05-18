@@ -1,2 +1,13 @@
 ---
 # handlers file for rethinkdb
+- name: "Restart master node"
+  service:
+    name: "rethinkdb"
+    state: "restarted"
+  when: ansible_host == master_node
+
+- name: "Restart slave nodes"
+  service:
+    name: "rethinkdb"
+    state: "restarted"
+  when: ansible_host != master_node

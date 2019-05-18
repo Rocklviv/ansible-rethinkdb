@@ -11,3 +11,7 @@
 
 - name: "Configure RethinkDB"
   import_tasks: "common_configuration.yml"
+
+- name: "Setup RethinkDB cluster"
+  import_tasks: "cluster_setup.yml"
+  when: (groups['rethinkdb_cluster'] | length > 1)
