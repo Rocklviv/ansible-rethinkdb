@@ -1,4 +1,4 @@
-Ansible RethinkDB
+Role Name
 =========
 [![Build Status](https://travis-ci.org/Rocklviv/ansible-rethinkdb.svg?branch=master)](https://travis-ci.org/Rocklviv/ansible-rethinkdb)
 
@@ -69,4 +69,4 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 Author Information
 ------------------
 
-Denis Chekirda aka <Rocklviv>
+Denis Chekirda aka Rocklviv
