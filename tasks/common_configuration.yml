@@ -1,19 +1,27 @@
 ---
+- name: "Ensure group {{ rungroup }} exists"
+  group:
+    name: "{{ rungroup }}"
+    state: "present"
+
+- name: "Ensure user {{ runuser }} exists"
+  user:
+    name: "{{ runuser }}"
+    group: "{{ rungroup }}"
+
+- name: "Ensure that {{ data_storage_path }} exists"
+  file:
+    path: "{{ data_storage_path }}"
+    state: "directory"
+    group: "{{ rungroup }}"
+    owner: "{{ runuser }}"
+    recurse: "yes"
+
 - name: "Setup configuration file"
   template:
     src: "rethinkdb.conf.j2"
     dest: "{{ startup_config_path }}/rethinkdb.conf"
   when: (groups['rethinkdb_cluster'] | length == 0)
-
-- name: "Setup group {{ rungroup }}"
-  group:
-    name: "{{ rungroup }}"
-    state: "present"
-
-- name: "Setup user {{ runuser }}"
-  user:
-    name: "{{ runuser }}"
-    group: "{{ rungroup }}"
 
 - name: "Start RethinkDB Server"
   service:
